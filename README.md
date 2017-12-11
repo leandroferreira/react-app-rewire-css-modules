@@ -2,20 +2,20 @@
 
 Add [CSS Module](https://github.com/css-modules/css-modules) loaders to your [create-react-app](https://github.com/facebookincubator/create-react-app) via [react-app-rewired](https://github.com/timarney/react-app-rewired).
 
-CSS Module styles can be written in CSS or SASS.
+CSS Module styles can be written in CSS.
 
 ## Installation
 
 This package is not yet published to the npm registry. Install from GitHub:
 
 ```
-yarn add --dev codebandits/react-app-rewire-css-modules sass-loader node-sass
+yarn add --dev codebandits/react-app-rewire-css-modules
 ```
 
 OR
 
 ```
-npm install --save-dev codebandits/react-app-rewire-css-modules sass-loader node-sass
+npm install --save-dev codebandits/react-app-rewire-css-modules
 ```
 
 ## Usage
@@ -23,14 +23,10 @@ npm install --save-dev codebandits/react-app-rewire-css-modules sass-loader node
 Use the following file extensions for any CSS Modules styles:
 
 - `*.module.css`
-- `*.module.sass`
-- `*.module.scss`
 
 Files with the following file extensions will load normally, without the CSS Modules loader:
 
 - `*.css`
-- `*.sass`
-- `*.scss`
 
 ### Example
 
@@ -51,8 +47,8 @@ module.exports = function override(config, env) {
 
 In your React application:
 
-```scss
-// src/App.module.scss
+```css
+// src/App.module.css
 
 .app {
   color: aqua;
@@ -67,7 +63,7 @@ In your React application:
 // src/App.js
 
 import React from 'react';
-import styles from './App.module.scss';
+import styles from './App.module.css';
 
 export default ({text}) => (
     <div className={styles.app}>{text}</div>

@@ -33,7 +33,6 @@ const addBeforeRule = (rulesSource, ruleMatcher, value) => {
 
 module.exports = function (config, env) {
     const cssRule = findRule(config.module.rules, cssRuleMatcher)
-    const sassRule = cloneDeep(cssRule)
     const cssModulesRule = cloneDeep(cssRule)
 
     cssRule.exclude = /\.module\.css$/
@@ -41,16 +40,6 @@ module.exports = function (config, env) {
     const cssModulesRuleCssLoader = findRule(cssModulesRule, cssLoaderMatcher)
     cssModulesRuleCssLoader.options = Object.assign({modules: true, localIdentName: '[local]___[hash:base64:5]'}, cssModulesRuleCssLoader.options)
     addBeforeRule(config.module.rules, fileLoaderMatcher, cssModulesRule)
-
-    sassRule.test = /\.s[ac]ss$/
-    sassRule.exclude = /\.module\.s[ac]ss$/
-    addAfterRule(sassRule, postcssLoaderMatcher, require.resolve('sass-loader'))
-    addBeforeRule(config.module.rules, fileLoaderMatcher, sassRule)
-
-    const sassModulesRule = cloneDeep(cssModulesRule)
-    sassModulesRule.test = /\.module\.s[ac]ss$/
-    addAfterRule(sassModulesRule, postcssLoaderMatcher, require.resolve('sass-loader'))
-    addBeforeRule(config.module.rules, fileLoaderMatcher, sassModulesRule)
 
     return config
 }
